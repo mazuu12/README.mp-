@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
+    <title>Registro y Chistes</title>
 </head>
 <body>
 
-    <h1>Registro</h1>
+    <h1>Registro de Usuario</h1>
 
-    <form action="juego.html" method="get"> 
+    <form action="confirmacion.html" method="get"> 
         
         <div>
             <label for="nombre">Nombre Completo:</label>
@@ -37,6 +37,51 @@
         </div>
 
     </form>
+
+    <hr>
+
+    <h2>🤣 ¿Necesitas un descanso?</h2>
+    
+    <button id="obtenerChisteBtn">Dame un Chiste de Programación</button>
+    
+    <p id="chiste" style="margin-top: 15px; font-style: italic;">Haz clic en el botón para ver un chiste...</p>
+
+    <script>
+        // 1. Obtener los elementos HTML que vamos a manipular
+        const botonChiste = document.getElementById('obtenerChisteBtn');
+        const parrafoChiste = document.getElementById('chiste');
+
+        // 2. Función asíncrona para obtener el chiste
+        async function obtenerChiste() {
+            // Muestra un mensaje de carga mientras espera la respuesta
+            parrafoChiste.textContent = "Cargando chiste...";
+            
+            // URL de la API de chistes de programación
+            const API_URL = 'https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single';
+
+            try {
+                // Realiza la solicitud a la API
+                const respuesta = await fetch(API_URL);
+                
+                // Convierte la respuesta a formato JSON
+                const datos = await respuesta.json();
+
+                // Verifica si la llamada fue exitosa y tiene un chiste
+                if (datos.error) {
+                    parrafoChiste.textContent = "Error al cargar el chiste. Intenta de nuevo.";
+                } else {
+                    // Muestra el chiste en el párrafo
+                    parrafoChiste.textContent = datos.joke;
+                }
+            } catch (error) {
+                // Maneja cualquier error de red o de la API
+                parrafoChiste.textContent = "Lo siento, ocurrió un error de conexión: " + error.message;
+            }
+        }
+
+        // 3. Agregar un "escuchador de eventos" al botón
+        botonChiste.addEventListener('click', obtenerChiste);
+    </script>
 
 </body>
 </html>

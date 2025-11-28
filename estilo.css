@@ -1,0 +1,53 @@
+#game-container {
+    width: 600px;
+    height: 100px; 
+    border: 5px solid #000;
+    background-color: #eee; 
+    margin: 50px auto;
+    position: relative; 
+    overflow: hidden; 
+}
+
+#player {
+    width: 30px;
+    height: 30px;
+    background-color: green;
+    border-radius: 5px;
+    position: absolute;
+    top: 35px; 
+    left: 10px; 
+}
+
+/* --- MODIFICACIÓN IMPORTANTE AQUÍ --- */
+.obstacle {
+    width: 25px; /* Más pequeño */
+    height: 25px; /* Cuadrado */
+    background-color: red;
+    position: absolute;
+    /* Los obstáculos ahora flotan, no están fijos a 15px de arriba */
+}
+
+/* Posiciones específicas de los tres obstáculos (ahora flotan verticalmente) */
+#obs1 { left: 150px; top: 10px; } /* Arriba */
+#obs2 { left: 300px; top: 65px; } /* Abajo */
+#obs3 { left: 450px; top: 35px; } /* Centrado */
+
+#goal {
+    width: 50px;
+    height: 100px;
+    background-color: gold;
+    color: #000;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0; 
+}
+
+#message {
+    text-align: center;
+    margin-top: 10px;
+    font-family: sans-serif;
+}
